@@ -47,7 +47,7 @@
                 <span id="editBtnText">Mode Édition : Désactivé</span>
             </button>
 
-            <!-- Push to GitHub Button -->
+            <!-- Push to GitHub Button (Le seul et unique bouton GitHub) -->
             <button onclick="pushToGithub()" class="px-4 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-900/30 active:scale-95">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
                 <span>Pousser sur GitHub</span>
@@ -366,7 +366,7 @@
             showToast('Notion supprimée.', 'success');
         }
 
-        // PUSH TO GITHUB (Sécurisé via prompt sans stockage de token en clair)
+        // PUSH TO GITHUB (Sécurisé via prompt)
         async function pushToGithub() {
             let token = localStorage.getItem('gh_pat_token');
 
