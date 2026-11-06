@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-slate-900 text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Java Interactif</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Prism.js Code Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace !important; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #64748b; }
+    </style>
+</head>
+<body class="h-full flex flex-col overflow-hidden bg-slate-950 text-slate-200">
+
+    <!-- Navbar Top -->
+    <header class="bg-slate-900 border-b border-slate-800 px-6 py-3.5 flex items-center justify-between shrink-0 shadow-lg">
+        <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center text-white font-bold shadow-md shadow-orange-500/20">
+                <i class="fa-brands fa-java text-xl"></i>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold bg-gradient-to-r from-orange-400 via-amber-200 to-amber-400 bg-clip-text text-transparent">
+                    Apprendre Java
+                </h1>
+                <p class="text-xs text-slate-400">Guide de référence interactif</p>
+            </div>
+        </div>
+
+        <!-- Right action buttons -->
+        <div class="flex items-center space-x-3">
+            <!-- Edit Mode Toggle -->
+            <button id="toggleEditBtn" onclick="toggleEditMode()" class="px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700">
+                <i class="fa-solid fa-pen-to-square text-amber-400"></i>
+                <span id="editBtnText">Mode Édition : Désactivé</span>
+            </button>
+
+            <!-- Config GitHub Modal Trigger -->
+            <button onclick="openGithubModal()" class="px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700">
+                <i class="fa-solid fa-gear text-slate-400"></i>
+                <span>Configuration GitHub</span>
+            </button>
+
+            <!-- Push to GitHub Button -->
+            <button onclick="pushToGithub()" class="px-4 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-900/30 active:scale-95">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>Pousser sur GitHub</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="flex flex-1 overflow-hidden">
+
+        <!-- Sidebar Navigation (Notions) -->
+        <aside class="w-72 bg-slate-900/80 border-r border-slate-800 flex flex-col shrink-0">
+            <div class="p-4 border-b border-slate-800/80 flex items-center justify-between">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Notions Clés</span>
+                <button id="addTabBtn" onclick="addNewTopic()" class="hidden text-xs bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 px-2.5 py-1 rounded-md border border-amber-500/30 transition-all flex items-center gap-1">
+                    <i class="fa-solid fa-plus"></i> Ajouter
+                </button>
+            </div>
+            
+            <nav id="topicsList" class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-1">
+                <!-- Dynamic Tabs generated here -->
+            </nav>
+            
+            <div class="p-3 border-t border-slate-800 bg-slate-950/40 text-xs text-slate-500 flex items-center justify-between">
+                <span>Statut : <span id="statusIndicator" class="text-emerald-400 font-medium">À jour (local)</span></span>
+            </div>
+        </aside>
+
+        <!-- Main Content View -->
+        <main class="flex-1 overflow-y-auto custom-scrollbar p-8 bg-slate-950 flex flex-col">
+            <div class="max-w-4xl w-full mx-auto space-y-6 flex-1">
+                
+                <!-- Topic Header -->
+                <div class="space-y-2 border-b border-slate-800 pb-5 flex items-start justify-between">
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <h2 id="topicTitle" class="text-3xl font-extrabold text-slate-100 tracking-tight"></h2>
+                            <button id="deleteTopicBtn" onclick="deleteCurrentTopic()" class="hidden text-rose-400 hover:text-rose-300 p-1.5 rounded-lg hover:bg-rose-950/40 transition-colors" title="Supprimer cet onglet">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="editTopicTitle" class="hidden text-2xl font-bold bg-slate-900 text-amber-300 border border-slate-700 rounded-lg px-3 py-1 w-full focus:outline-none focus:border-amber-500 mt-1" oninput="updateCurrentTopicTitle(this.value)">
+                    </div>
+                    <span id="topicBadge" class="bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Java Core
+                    </span>
+                </div>
+
+                <!-- Rich Description Card -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl relative group">
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-amber-400"></i> Explication de la notion
+                    </h3>
+                    
+                    <!-- Standard View Mode Text -->
+                    <div id="topicDescription" class="prose prose-invert max-w-none text-slate-300 leading-relaxed space-y-3"></div>
+
+                    <!-- Edit Mode Textarea -->
+                    <textarea id="editTopicDescription" class="hidden w-full h-40 bg-slate-950 text-slate-200 border border-slate-700 rounded-lg p-3 text-sm focus:outline-none focus:border-amber-500 font-sans" oninput="updateCurrentTopicDesc(this.value)"></textarea>
+                </div>
+
+                <!-- Code Example Card -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-xl">
+                    <div class="bg-slate-800/80 px-4 py-2.5 border-b border-slate-700/60 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                            <span class="ml-2 text-xs font-mono text-slate-400">Example.java</span>
+                        </div>
+                        <button onclick="copyCode()" class="text-xs text-slate-400 hover:text-slate-200 flex items-center gap-1 transition-colors bg-slate-700/50 px-2 py-1 rounded">
+                            <i class="fa-regular fa-copy"></i> Copier
+                        </button>
+                    </div>
+
+                    <!-- Code Display -->
+                    <div id="codeDisplayContainer" class="p-4 bg-slate-950 overflow-x-auto">
+                        <pre class="m-0"><code id="topicCode" class="language-java"></code></pre>
+                    </div>
+
+                    <!-- Code Edit Box -->
+                    <div id="codeEditContainer" class="hidden p-4 bg-slate-950">
+                        <textarea id="editTopicCode" class="w-full h-64 bg-slate-900 text-emerald-400 font-mono text-sm border border-slate-700 rounded-lg p-3 focus:outline-none focus:border-amber-500" oninput="updateCurrentTopicCode(this.value)"></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- GitHub Settings Modal -->
+    <div id="githubModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <button onclick="closeGithubModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="flex items-center space-x-3 mb-4">
+                <i class="fa-brands fa-github text-2xl text-amber-400"></i>
+                <h3 class="text-lg font-bold text-white">Configuration GitHub API</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-5">
+                Renseignez vos identifiants pour pouvoir sauvegarder vos données directement sur votre dépôt GitHub.
+            </p>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1">Personal Access Token (PAT)</label>
+                    <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                    <p class="text-[10px] text-slate-500 mt-1">Nécessite les permissions `repo` ou `contents:write`.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Propriétaire (User/Org)</label>
+                        <input type="text" id="ghOwner" placeholder="mon-pseudo" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Nom du Dépôt</label>
+                        <input type="text" id="ghRepo" placeholder="mon-tuto-java" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Branche</label>
+                        <input type="text" id="ghBranch" placeholder="main" value="main" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Chemin du Fichier</label>
+                        <input type="text" id="ghPath" placeholder="index.html" value="index.html" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 flex justify-end space-x-3">
+                <button onclick="closeGithubModal()" class="px-4 py-2 text-xs font-medium text-slate-400 hover:text-white">Annuler</button>
+                <button onclick="saveGithubSettings()" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold rounded-lg text-xs transition-colors">
+                    Enregistrer la config
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Default Java Topics Data
+        const defaultTopics = [
+            {
+                id: 'variables',
+                title: 'Variables & Types de données',
+                description: 'En Java, chaque variable doit être déclarée avec un type spécifique. Les types primitifs principaux incluent `int` pour les entiers, `double` pour les nombres à virgule, `boolean` pour vrai/faux et `char` pour les caractères. Le type `String` permet d\'employer des chaînes de caractères.',
+                code: `public class Main {\n    public static void main(String[] args) {\n        // Déclaration de variables primitives\n        int age = 25;\n        double prix = 19.99;\n        boolean estActif = true;\n        char initiale = 'J';\n\n        // Objet String\n        String nom = "Java Developer";\n\n        System.out.println("Nom: " + nom + ", Âge: " + age);\n    }\n}`
+            },
+            {
+                id: 'control-flow',
+                title: 'Structures de Contrôle',
+                description: 'Les structures de contrôle permettent d\'orienter le flux d\'exécution du programme avec des conditions (`if`, `else`, `switch`) et d\'exécuter des blocs d\'instructions en boucle (`for`, `while`, `do-while`).',
+                code: `public class Main {\n    public static void main(String[] args) {\n        int score = 85;\n\n        // Structure conditionnelle\n        if (score >= 90) {\n            System.out.println("Excellent !");\n        } else if (score >= 70) {\n            System.out.println("Bien joué !");\n        } else {\n            System.out.println("Encouragements.");\n        }\n\n        // Boucle For\n        for (int i = 1; i <= 3; i++) {\n            System.out.println("Compteur: " + i);\n        }\n    }\n}`
+            },
+            {
+                id: 'oop',
+                title: 'Programmation Orientée Objet (POO)',
+                description: 'Java est un langage entièrement orienté objet. Une **Classe** définit la structure et le comportement, tandis qu\'un **Objet** est une instance de cette classe. Les piliers sont l\'Encapsulation, l\'Héritage et le Polymorphisme.',
+                code: `// Définition de la classe Voiture\nclass Voiture {\n    private String marque;\n    private int vitesse;\n\n    // Constructeur\n    public Voiture(String marque) {\n        this.marque = marque;\n        this.vitesse = 0;\n    }\n\n    public void accelerer(int valeur) {\n        this.vitesse += valeur;\n        System.out.println(marque + " roule à " + vitesse + " km/h");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Voiture maVoiture = new Voiture("Tesla");\n        maVoiture.accelerer(50);\n    }\n}`
+            },
+            {
+                id: 'collections',
+                title: 'Collections (List, Map, Set)',
+                description: 'Le Framework Collections regroupe des structures de données réutilisables. `ArrayList` gère des listes dynamiques ordonnées, `HashMap` stocke des clés-valeurs associatives et `HashSet` stocke des éléments uniques.',
+                code: `import java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\npublic class Main {\n    public static void main(String[] args) {\n        // Liste dynamique\n        List<String> fruits = new ArrayList<>();\n        fruits.add("Pomme");\n        fruits.add("Banane");\n\n        // Map Clé-Valeur\n        Map<String, Integer> ages = new HashMap<>();\n        ages.put("Alice", 30);\n        ages.put("Bob", 25);\n\n        System.out.println("Fruits: " + fruits);\n        System.out.println("Âge d'Alice: " + ages.get("Alice"));\n    }\n}`
+            },
+            {
+                id: 'exceptions',
+                title: 'Gestion des Exceptions',
+                description: 'Les exceptions gèrent les erreurs pendant l\'exécution. Les blocs `try-catch-finally` permettent d\'intercepter les erreurs sans faire planter le programme.',
+                code: `public class Main {\n    public static void main(String[] args) {\n        try {\n            int resultat = 10 / 0;\n        } catch (ArithmeticException e) {\n            System.err.println("Erreur : Division par zéro impossible !");\n        } finally {\n            System.out.println("Bloc finally toujours exécuté.");\n        }\n    }\n}`
+            }
+        ];
+
+        // State variables
+        let topics = [];
+        let currentTopicId = '';
+        let isEditMode = false;
+        let githubConfig = {
+            token: '',
+            owner: '',
+            repo: '',
+            branch: 'main',
+            path: 'index.html'
+        };
+
+        // Initialize App
+        window.onload = function() {
+            loadInitialData();
+            loadGithubConfig();
+            renderSidebar();
+            selectTopic(topics[0]?.id || '');
+        };
+
+        function loadInitialData() {
+            const savedData = localStorage.getItem('java_tutorial_topics');
+            if (savedData) {
+                try {
+                    topics = JSON.parse(savedData);
+                } catch (e) {
+                    topics = defaultTopics;
+                }
+            } else {
+                topics = defaultTopics;
+            }
+        }
+
+        function saveDataLocally() {
+            localStorage.setItem('java_tutorial_topics', JSON.stringify(topics));
+            showToast('Modifications sauvegardées localement', 'info');
+        }
+
+        // Render Navigation Tabs
+        function renderSidebar() {
+            const container = document.getElementById('topicsList');
+            container.innerHTML = '';
+
+            topics.forEach((topic) => {
+                const isActive = topic.id === currentTopicId;
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group ${
+                    isActive 
+                    ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30' 
+                    : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
+                }`;
+                btn.onclick = () => selectTopic(topic.id);
+                btn.innerHTML = `
+                    <span class="truncate">${escapeHtml(topic.title)}</span>
+                    <i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity ${isActive ? 'opacity-100 text-amber-400' : ''}"></i>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        // Select Active Topic
+        function selectTopic(id) {
+            currentTopicId = id;
+            const topic = topics.find(t => t.id === id);
+            if (!topic) return;
+
+            renderSidebar();
+
+            document.getElementById('topicTitle').textContent = topic.title;
+            document.getElementById('editTopicTitle').value = topic.title;
+
+            document.getElementById('topicDescription').innerHTML = escapeHtml(topic.description).replace(/\n/g, '<br>');
+            document.getElementById('editTopicDescription').value = topic.description;
+
+            document.getElementById('topicCode').textContent = topic.code;
+            document.getElementById('editTopicCode').value = topic.code;
+
+            // Re-highlight Prism
+            Prism.highlightElement(document.getElementById('topicCode'));
+        }
+
+        // Edit Mode Toggle
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const btnText = document.getElementById('editBtnText');
+            const toggleBtn = document.getElementById('toggleEditBtn');
+            const addBtn = document.getElementById('addTabBtn');
+            const deleteBtn = document.getElementById('deleteTopicBtn');
+
+            const viewTitle = document.getElementById('topicTitle');
+            const editTitle = document.getElementById('editTopicTitle');
+
+            const viewDesc = document.getElementById('topicDescription');
+            const editDesc = document.getElementById('editTopicDescription');
+
+            const viewCode = document.getElementById('codeDisplayContainer');
+            const editCode = document.getElementById('codeEditContainer');
+
+            if (isEditMode) {
+                btnText.textContent = "Mode Édition : Activé";
+                toggleBtn.className = toggleBtn.className.replace('bg-slate-800 text-slate-300', 'bg-amber-500 text-slate-950 font-bold');
+                addBtn.classList.remove('hidden');
+                deleteBtn.classList.remove('hidden');
+
+                viewTitle.classList.add('hidden');
+                editTitle.classList.remove('hidden');
+
+                viewDesc.classList.add('hidden');
+                editDesc.classList.remove('hidden');
+
+                viewCode.classList.add('hidden');
+                editCode.classList.remove('hidden');
+
+                showToast('Mode édition activé. Vos changements s\'enregistrent en direct.', 'info');
+            } else {
+                btnText.textContent = "Mode Édition : Désactivé";
+                toggleBtn.className = toggleBtn.className.replace('bg-amber-500 text-slate-950 font-bold', 'bg-slate-800 text-slate-300');
+                addBtn.classList.add('hidden');
+                deleteBtn.classList.add('hidden');
+
+                viewTitle.classList.remove('hidden');
+                editTitle.classList.add('hidden');
+
+                viewDesc.classList.remove('hidden');
+                editDesc.classList.add('hidden');
+
+                viewCode.classList.remove('hidden');
+                editCode.classList.add('hidden');
+
+                // Re-render display
+                selectTopic(currentTopicId);
+            }
+        }
+
+        // Update Topic Data
+        function updateCurrentTopicTitle(val) {
+            const topic = topics.find(t => t.id === currentTopicId);
+            if (topic) {
+                topic.title = val;
+                document.getElementById('topicTitle').textContent = val;
+                renderSidebar();
+                saveDataLocally();
+            }
+        }
+
+        function updateCurrentTopicDesc(val) {
+            const topic = topics.find(t => t.id === currentTopicId);
+            if (topic) {
+                topic.description = val;
+                document.getElementById('topicDescription').innerHTML = escapeHtml(val).replace(/\n/g, '<br>');
+                saveDataLocally();
+            }
+        }
+
+        function updateCurrentTopicCode(val) {
+            const topic = topics.find(t => t.id === currentTopicId);
+            if (topic) {
+                topic.code = val;
+                document.getElementById('topicCode').textContent = val;
+                Prism.highlightElement(document.getElementById('topicCode'));
+                saveDataLocally();
+            }
+        }
+
+        // Add New Topic
+        function addNewTopic() {
+            const newId = 'topic-' + Date.now();
+            const newTopic = {
+                id: newId,
+                title: 'Nouvelle Notion',
+                description: 'Description de la nouvelle notion Java...',
+                code: '// Écrivez votre code Java ici\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello World");\n    }\n}'
+            };
+            topics.push(newTopic);
+            saveDataLocally();
+            selectTopic(newId);
+            showToast('Nouvelle notion créée !', 'success');
+        }
+
+        // Delete Current Topic
+        function deleteCurrentTopic() {
+            if (topics.length <= 1) {
+                showToast('Impossible de supprimer la seule notion restante.', 'warning');
+                return;
+            }
+            topics = topics.filter(t => t.id !== currentTopicId);
+            saveDataLocally();
+            selectTopic(topics[0].id);
+            showToast('Notion supprimée.', 'success');
+        }
+
+        // GitHub Modal & Credentials Management
+        function openGithubModal() {
+            document.getElementById('githubModal').classList.remove('hidden');
+        }
+
+        function closeGithubModal() {
+            document.getElementById('githubModal').classList.add('hidden');
+        }
+
+        function loadGithubConfig() {
+            const saved = localStorage.getItem('java_gh_config');
+            if (saved) {
+                try {
+                    githubConfig = JSON.parse(saved);
+                    document.getElementById('ghToken').value = githubConfig.token || '';
+                    document.getElementById('ghOwner').value = githubConfig.owner || '';
+                    document.getElementById('ghRepo').value = githubConfig.repo || '';
+                    document.getElementById('ghBranch').value = githubConfig.branch || 'main';
+                    document.getElementById('ghPath').value = githubConfig.path || 'index.html';
+                } catch(e) {}
+            }
+        }
+
+        function saveGithubSettings() {
+            githubConfig.token = document.getElementById('ghToken').value.trim();
+            githubConfig.owner = document.getElementById('ghOwner').value.trim();
+            githubConfig.repo = document.getElementById('ghRepo').value.trim();
+            githubConfig.branch = document.getElementById('ghBranch').value.trim() || 'main';
+            githubConfig.path = document.getElementById('ghPath').value.trim() || 'index.html';
+
+            localStorage.setItem('java_gh_config', JSON.stringify(githubConfig));
+            closeGithubModal();
+            showToast('Configuration GitHub enregistrée !', 'success');
+        }
+
+        // Push directly to GitHub REST API
+        async function pushToGithub() {
+            if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) {
+                showToast('Veuillez configurer vos accès GitHub (PAT, owner, repo) d\'abord.', 'warning');
+                openGithubModal();
+                return;
+            }
+
+            showToast('Préparation et envoi vers GitHub...', 'info');
+
+            try {
+                // Generate current HTML file content with injected data
+                const currentHtml = document.documentElement.outerHTML;
+
+                // 1. Get SHA of file if exists
+                const getUrl = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
+                let sha = null;
+
+                const getRes = await fetch(getUrl, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+
+                if (getRes.ok) {
+                    const getData = await getRes.json();
+                    sha = getData.sha;
+                }
+
+                // 2. Encode HTML content in Base64 (UTF-8 safe)
+                const utf8Bytes = new TextEncoder().encode("<!DOCTYPE html>\n" + currentHtml);
+                let binaryStr = "";
+                for (let i = 0; i < utf8Bytes.length; i++) {
+                    binaryStr += String.fromCharCode(utf8Bytes[i]);
+                }
+                const contentBase64 = btoa(binaryStr);
+
+                // 3. Put / Commit File
+                const putUrl = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`;
+                const bodyPayload = {
+                    message: `Update Java Tutorial content [${new Date().toLocaleString()}]`,
+                    content: contentBase64,
+                    branch: githubConfig.branch
+                };
+                if (sha) bodyPayload.sha = sha;
+
+                const putRes = await fetch(putUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify(bodyPayload)
+                });
+
+                if (putRes.ok) {
+                    showToast('Succès ! Le fichier a été poussé sur GitHub.', 'success');
+                } else {
+                    const errData = await putRes.json();
+                    throw new Error(errData.message || 'Erreur GitHub API');
+                }
+
+            } catch (err) {
+                console.error(err);
+                showToast('Erreur lors du push : ' + err.message, 'error');
+            }
+        }
+
+        // Helpers
+        function copyCode() {
+            const topic = topics.find(t => t.id === currentTopicId);
+            if (topic) {
+                const textarea = document.createElement('textarea');
+                textarea.value = topic.code;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('Code copié dans le presse-papier !', 'success');
+            }
+        }
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            let bgColors = 'bg-slate-800 border-slate-700 text-slate-200';
+            let icon = 'fa-circle-info text-sky-400';
+
+            if (type === 'success') {
+                bgColors = 'bg-slate-900 border-emerald-500/40 text-emerald-200';
+                icon = 'fa-circle-check text-emerald-400';
+            } else if (type === 'warning') {
+                bgColors = 'bg-slate-900 border-amber-500/40 text-amber-200';
+                icon = 'fa-triangle-exclamation text-amber-400';
+            } else if (type === 'error') {
+                bgColors = 'bg-slate-900 border-rose-500/40 text-rose-200';
+                icon = 'fa-circle-xmark text-rose-400';
+            }
+
+            toast.className = `pointer-events-auto px-4 py-3 rounded-xl border ${bgColors} shadow-xl text-xs font-medium flex items-center space-x-2 transition-all transform translate-y-2 opacity-0`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-sm"></i> <span>${message}</span>`;
+
+            container.appendChild(toast);
+
+            // Animate in
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            // Remove after 3.5s
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
