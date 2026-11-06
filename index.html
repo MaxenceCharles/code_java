@@ -47,12 +47,6 @@
                 <span id="editBtnText">Mode Édition : Désactivé</span>
             </button>
 
-            <!-- Config GitHub Modal Trigger -->
-            <button onclick="openGithubModal()" class="px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700">
-                <i class="fa-solid fa-gear text-slate-400"></i>
-                <span>Configuration GitHub</span>
-            </button>
-
             <!-- Push to GitHub Button -->
             <button onclick="pushToGithub()" class="px-4 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-900/30 active:scale-95">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
@@ -144,60 +138,19 @@
         </main>
     </div>
 
-    <!-- GitHub Settings Modal -->
-    <div id="githubModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
-            <button onclick="closeGithubModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <div class="flex items-center space-x-3 mb-4">
-                <i class="fa-brands fa-github text-2xl text-amber-400"></i>
-                <h3 class="text-lg font-bold text-white">Configuration GitHub API</h3>
-            </div>
-            <p class="text-xs text-slate-400 mb-5">
-                Renseignez vos identifiants pour pouvoir sauvegarder vos données directement sur votre dépôt GitHub.
-            </p>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">Personal Access Token (PAT)</label>
-                    <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
-                    <p class="text-[10px] text-slate-500 mt-1">Nécessite les permissions `repo` ou `contents:write`.</p>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-300 mb-1">Propriétaire (User/Org)</label>
-                        <input type="text" id="ghOwner" placeholder="mon-pseudo" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-300 mb-1">Nom du Dépôt</label>
-                        <input type="text" id="ghRepo" placeholder="mon-tuto-java" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-300 mb-1">Branche</label>
-                        <input type="text" id="ghBranch" placeholder="main" value="main" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-300 mb-1">Chemin du Fichier</label>
-                        <input type="text" id="ghPath" placeholder="index.html" value="index.html" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
-                    </div>
-                </div>
-            </div>
-            <div class="mt-6 flex justify-end space-x-3">
-                <button onclick="closeGithubModal()" class="px-4 py-2 text-xs font-medium text-slate-400 hover:text-white">Annuler</button>
-                <button onclick="saveGithubSettings()" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold rounded-lg text-xs transition-colors">
-                    Enregistrer la config
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- Toast Notification Container -->
     <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
 
     <!-- JavaScript Application Logic -->
     <script>
+        // CONFIGURATION GITHUB (À modifier avec votre profil et votre dépôt)
+        const GITHUB_CONFIG = {
+            owner: "VOTRE_NOM_UTILISATEUR", 
+            repo: "VOTRE_NOM_DE_DEPOT",    
+            branch: "main",
+            path: "index.html"
+        };
+
         // Default Java Topics Data
         const defaultTopics = [
             {
@@ -236,18 +189,10 @@
         let topics = [];
         let currentTopicId = '';
         let isEditMode = false;
-        let githubConfig = {
-            token: '',
-            owner: '',
-            repo: '',
-            branch: 'main',
-            path: 'index.html'
-        };
 
         // Initialize App
         window.onload = function() {
             loadInitialData();
-            loadGithubConfig();
             renderSidebar();
             selectTopic(topics[0]?.id || '');
         };
@@ -267,7 +212,6 @@
 
         function saveDataLocally() {
             localStorage.setItem('java_tutorial_topics', JSON.stringify(topics));
-            showToast('Modifications sauvegardées localement', 'info');
         }
 
         // Render Navigation Tabs
@@ -361,7 +305,6 @@
                 viewCode.classList.remove('hidden');
                 editCode.classList.add('hidden');
 
-                // Re-render display
                 selectTopic(currentTopicId);
             }
         }
@@ -423,92 +366,64 @@
             showToast('Notion supprimée.', 'success');
         }
 
-        // GitHub Modal & Credentials Management
-        function openGithubModal() {
-            document.getElementById('githubModal').classList.remove('hidden');
-        }
-
-        function closeGithubModal() {
-            document.getElementById('githubModal').classList.add('hidden');
-        }
-
-        function loadGithubConfig() {
-            const saved = localStorage.getItem('java_gh_config');
-            if (saved) {
-                try {
-                    githubConfig = JSON.parse(saved);
-                    document.getElementById('ghToken').value = githubConfig.token || '';
-                    document.getElementById('ghOwner').value = githubConfig.owner || '';
-                    document.getElementById('ghRepo').value = githubConfig.repo || '';
-                    document.getElementById('ghBranch').value = githubConfig.branch || 'main';
-                    document.getElementById('ghPath').value = githubConfig.path || 'index.html';
-                } catch(e) {}
-            }
-        }
-
-        function saveGithubSettings() {
-            githubConfig.token = document.getElementById('ghToken').value.trim();
-            githubConfig.owner = document.getElementById('ghOwner').value.trim();
-            githubConfig.repo = document.getElementById('ghRepo').value.trim();
-            githubConfig.branch = document.getElementById('ghBranch').value.trim() || 'main';
-            githubConfig.path = document.getElementById('ghPath').value.trim() || 'index.html';
-
-            localStorage.setItem('java_gh_config', JSON.stringify(githubConfig));
-            closeGithubModal();
-            showToast('Configuration GitHub enregistrée !', 'success');
-        }
-
-        // Push directly to GitHub REST API
+        // PUSH TO GITHUB (Sécurisé via prompt sans stockage de token en clair)
         async function pushToGithub() {
-            if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) {
-                showToast('Veuillez configurer vos accès GitHub (PAT, owner, repo) d\'abord.', 'warning');
-                openGithubModal();
-                return;
+            let token = localStorage.getItem('gh_pat_token');
+
+            if (!token) {
+                token = prompt("Entrez votre Personal Access Token GitHub (ghp_... ou github_pat_...) :");
+                if (!token) return showToast("Publication annulée (token requis)", 'warning');
+                token = token.trim();
+                localStorage.setItem('gh_pat_token', token);
             }
 
-            showToast('Préparation et envoi vers GitHub...', 'info');
+            showToast('Envoi des modifications sur GitHub...', 'info');
 
             try {
-                // Generate current HTML file content with injected data
                 const currentHtml = document.documentElement.outerHTML;
 
-                // 1. Get SHA of file if exists
-                const getUrl = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
+                // 1. Récupérer le SHA actuel du fichier sur GitHub
+                const getUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}?ref=${GITHUB_CONFIG.branch}`;
                 let sha = null;
 
                 const getRes = await fetch(getUrl, {
                     headers: {
-                        'Authorization': `token ${githubConfig.token}`,
+                        'Authorization': `Bearer ${token}`,
                         'Accept': 'application/vnd.github.v3+json'
                     }
                 });
+
+                if (getRes.status === 401 || getRes.status === 403) {
+                    localStorage.removeItem('gh_pat_token');
+                    throw new Error("Token invalide ou permissions insuffisantes (401/403).");
+                }
 
                 if (getRes.ok) {
                     const getData = await getRes.json();
                     sha = getData.sha;
                 }
 
-                // 2. Encode HTML content in Base64 (UTF-8 safe)
-                const utf8Bytes = new TextEncoder().encode("<!DOCTYPE html>\n" + currentHtml);
+                // 2. Encoder le contenu HTML en Base64
+                const utf8Bytes = new TextEncoder().encode(currentHtml);
                 let binaryStr = "";
                 for (let i = 0; i < utf8Bytes.length; i++) {
                     binaryStr += String.fromCharCode(utf8Bytes[i]);
                 }
                 const contentBase64 = btoa(binaryStr);
 
-                // 3. Put / Commit File
-                const putUrl = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`;
+                // 3. Envoyer la mise à jour (PUT) sur l'API GitHub
+                const putUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
                 const bodyPayload = {
-                    message: `Update Java Tutorial content [${new Date().toLocaleString()}]`,
+                    message: `Mise à jour du tutoriel Java depuis l'interface [${new Date().toLocaleString()}]`,
                     content: contentBase64,
-                    branch: githubConfig.branch
+                    branch: GITHUB_CONFIG.branch
                 };
                 if (sha) bodyPayload.sha = sha;
 
                 const putRes = await fetch(putUrl, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${githubConfig.token}`,
+                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
                         'Accept': 'application/vnd.github.v3+json'
                     },
@@ -516,7 +431,7 @@
                 });
 
                 if (putRes.ok) {
-                    showToast('Succès ! Le fichier a été poussé sur GitHub.', 'success');
+                    showToast('Succès ! Le site a été mis à jour sur GitHub.', 'success');
                 } else {
                     const errData = await putRes.json();
                     throw new Error(errData.message || 'Erreur GitHub API');
@@ -574,14 +489,12 @@
 
             container.appendChild(toast);
 
-            // Animate in
             setTimeout(() => {
                 toast.classList.remove('translate-y-2', 'opacity-0');
             }, 10);
 
-            // Remove after 3.5s
             setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-2');
+                toast.classList.add('translate-y-2', 'opacity-0');
                 setTimeout(() => toast.remove(), 300);
             }, 3500);
         }
