@@ -22,13 +22,16 @@
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #64748b; }
     </style>
-    <link rel="icon" type="image/png" href="iconjava.png">
 </head>
 <body class="h-full flex flex-col overflow-hidden bg-slate-950 text-slate-200">
 
     <!-- Navbar Top -->
     <header class="bg-slate-900 border-b border-slate-800 px-6 py-3.5 flex items-center justify-between shrink-0 shadow-lg">
         <div class="flex items-center space-x-3">
+            <!-- Bouton pour masquer/afficher le menu latéral -->
+            <button onclick="toggleSidebar()" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700" title="Afficher/Masquer le menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
             <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center text-white font-bold shadow-md shadow-orange-500/20">
                 <i class="fa-brands fa-java text-xl"></i>
             </div>
@@ -48,7 +51,7 @@
                 <span id="editBtnText">Mode Édition : Désactivé</span>
             </button>
 
-            <!-- Push to GitHub Button (Le seul et unique bouton GitHub) -->
+            <!-- Push to GitHub Button -->
             <button onclick="pushToGithub()" class="px-4 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-900/30 active:scale-95">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
                 <span>Pousser sur GitHub</span>
@@ -60,7 +63,7 @@
     <div class="flex flex-1 overflow-hidden">
 
         <!-- Sidebar Navigation (Notions) -->
-        <aside class="w-72 bg-slate-900/80 border-r border-slate-800 flex flex-col shrink-0">
+        <aside id="sidebar" class="w-72 bg-slate-900/80 border-r border-slate-800 flex flex-col shrink-0 transition-all duration-300">
             <div class="p-4 border-b border-slate-800/80 flex items-center justify-between">
                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Notions Clés</span>
                 <button id="addTabBtn" onclick="addNewTopic()" class="hidden text-xs bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 px-2.5 py-1 rounded-md border border-amber-500/30 transition-all flex items-center gap-1">
@@ -147,9 +150,9 @@
         // CONFIGURATION GITHUB
         const GITHUB_CONFIG = {
             owner: "MaxenceCharles", 
-            repo: "commandes_linux",    
+            repo: "code_java",    
             branch: "main",
-            path: "index.html"     
+            path: "index.html"                
         };
 
         // Default Java Topics Data
@@ -190,6 +193,7 @@
         let topics = [];
         let currentTopicId = '';
         let isEditMode = false;
+        let isSidebarHidden = false;
 
         // Initialize App
         window.onload = function() {
@@ -215,26 +219,85 @@
             localStorage.setItem('java_tutorial_topics', JSON.stringify(topics));
         }
 
-        // Render Navigation Tabs
+        // Toggle Sidebar Visibility
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            isSidebarHidden = !isSidebarHidden;
+            if (isSidebarHidden) {
+                sidebar.classList.add('hidden');
+            } else {
+                sidebar.classList.remove('hidden');
+            }
+        }
+
+        // Render Navigation Tabs with Reordering Support in Edit Mode
         function renderSidebar() {
             const container = document.getElementById('topicsList');
             container.innerHTML = '';
 
-            topics.forEach((topic) => {
+            topics.forEach((topic, index) => {
                 const isActive = topic.id === currentTopicId;
-                const btn = document.createElement('button');
-                btn.className = `w-full text-left px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group ${
+                const div = document.createElement('div');
+                div.className = `w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group ${
                     isActive 
                     ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30' 
                     : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
                 }`;
-                btn.onclick = () => selectTopic(topic.id);
-                btn.innerHTML = `
-                    <span class="truncate">${escapeHtml(topic.title)}</span>
-                    <i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity ${isActive ? 'opacity-100 text-amber-400' : ''}"></i>
-                `;
-                container.appendChild(btn);
+
+                // Titre cliquable de la notion
+                const titleSpan = document.createElement('span');
+                titleSpan.className = 'truncate cursor-pointer flex-1';
+                titleSpan.textContent = topic.title;
+                titleSpan.onclick = () => selectTopic(topic.id);
+                div.appendChild(titleSpan);
+
+                // Si le mode édition est actif, afficher les flèches pour réordonner
+                if (isEditMode) {
+                    const controls = document.createElement('div');
+                    controls.className = 'flex items-center space-x-1 ml-2';
+
+                    // Bouton Monter
+                    const upBtn = document.createElement('button');
+                    upBtn.innerHTML = '<i class="fa-solid fa-arrow-up text-xs"></i>';
+                    upBtn.className = `p-1 text-slate-400 hover:text-white transition-colors ${index === 0 ? 'opacity-30 cursor-not-allowed' : ''}`;
+                    upBtn.title = 'Monter';
+                    upBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        moveTopic(index, -1);
+                    };
+
+                    // Bouton Descendre
+                    const downBtn = document.createElement('button');
+                    downBtn.innerHTML = '<i class="fa-solid fa-arrow-down text-xs"></i>';
+                    downBtn.className = `p-1 text-slate-400 hover:text-white transition-colors ${index === topics.length - 1 ? 'opacity-30 cursor-not-allowed' : ''}`;
+                    downBtn.title = 'Descendre';
+                    downBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        moveTopic(index, 1);
+                    };
+
+                    controls.appendChild(upBtn);
+                    controls.appendChild(downBtn);
+                    div.appendChild(controls);
+                }
+
+                container.appendChild(div);
             });
+        }
+
+        // Move Topic Up or Down
+        function moveTopic(index, direction) {
+            const newIndex = index + direction;
+            if (newIndex < 0 || newIndex >= topics.length) return;
+
+            // Échange des éléments dans le tableau
+            const temp = topics[index];
+            topics[index] = topics[newIndex];
+            topics[newIndex] = temp;
+
+            saveDataLocally();
+            renderSidebar();
+            showToast('Ordre des notions mis à jour', 'info');
         }
 
         // Select Active Topic
@@ -290,7 +353,7 @@
                 viewCode.classList.add('hidden');
                 editCode.classList.remove('hidden');
 
-                showToast('Mode édition activé. Vos changements s\'enregistrent en direct.', 'info');
+                showToast('Mode édition activé. Vous pouvez modifier, ajouter ou réordonner.', 'info');
             } else {
                 btnText.textContent = "Mode Édition : Désactivé";
                 toggleBtn.className = toggleBtn.className.replace('bg-amber-500 text-slate-950 font-bold', 'bg-slate-800 text-slate-300');
@@ -308,6 +371,7 @@
 
                 selectTopic(currentTopicId);
             }
+            renderSidebar(); // Met à jour l'affichage des flèches dans la sidebar
         }
 
         // Update Topic Data
