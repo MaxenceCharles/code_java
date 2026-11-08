@@ -1,4 +1,6 @@
-<html lang="fr" class="h-full bg-slate-900 text-slate-100"><head>
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-slate-900 text-slate-100">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Java Interactif</title>
@@ -11,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
     <!-- Google Font Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Fira+Code:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="iconjava.png">
     <style>
         body { font-family: 'Inter', sans-serif; }
@@ -20,14 +22,14 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        [contenteditable="true"]:focus { outline: none; }
     </style>
-<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.pointer-events-auto{pointer-events:auto}.fixed{position:fixed}.relative{position:relative}.bottom-5{bottom:1.25rem}.right-5{right:1.25rem}.z-50{z-index:50}.m-0{margin:0px}.mx-auto{margin-left:auto;margin-right:auto}.mb-3{margin-bottom:0.75rem}.ml-2{margin-left:0.5rem}.mt-1{margin-top:0.25rem}.inline-block{display:inline-block}.flex{display:flex}.hidden{display:none}.h-full{height:100%}.h-3{height:0.75rem}.h-40{height:10rem}.h-64{height:16rem}.h-9{height:2.25rem}.w-3{width:0.75rem}.w-72{width:18rem}.w-9{width:2.25rem}.w-full{width:100%}.max-w-4xl{max-width:56rem}.max-w-none{max-width:none}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.translate-y-2{--tw-translate-y:0.5rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.cursor-not-allowed{cursor:not-allowed}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.space-x-1 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.25rem * var(--tw-space-x-reverse));margin-left:calc(0.25rem * calc(1 - var(--tw-space-x-reverse)))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded{border-radius:0.25rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-r{border-right-width:1px}.border-t{border-top-width:1px}.border-amber-500\/20{border-color:rgb(245 158 11 / 0.2)}.border-amber-500\/30{border-color:rgb(245 158 11 / 0.3)}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-slate-700\/60{border-color:rgb(51 65 85 / 0.6)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.border-slate-800\/80{border-color:rgb(30 41 59 / 0.8)}.border-emerald-500\/40{border-color:rgb(16 185 129 / 0.4)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(2 6 23 / var(--tw-bg-opacity, 1))}.bg-amber-500\/10{background-color:rgb(245 158 11 / 0.1)}.bg-amber-500\/80{background-color:rgb(245 158 11 / 0.8)}.bg-emerald-500\/80{background-color:rgb(16 185 129 / 0.8)}.bg-rose-500\/80{background-color:rgb(244 63 94 / 0.8)}.bg-slate-700\/50{background-color:rgb(51 65 85 / 0.5)}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-800\/80{background-color:rgb(30 41 59 / 0.8)}.bg-slate-900\/80{background-color:rgb(15 23 42 / 0.8)}.bg-slate-950\/40{background-color:rgb(2 6 23 / 0.4)}.bg-amber-500\/15{background-color:rgb(245 158 11 / 0.15)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.bg-gradient-to-tr{background-image:linear-gradient(to top right, var(--tw-gradient-stops))}.from-amber-500{--tw-gradient-from:#f59e0b var(--tw-gradient-from-position);--tw-gradient-to:rgb(245 158 11 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-emerald-600{--tw-gradient-from:#059669 var(--tw-gradient-from-position);--tw-gradient-to:rgb(5 150 105 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-orange-400{--tw-gradient-from:#fb923c var(--tw-gradient-from-position);--tw-gradient-to:rgb(251 146 60 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-amber-200{--tw-gradient-to:rgb(253 230 138 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #fde68a var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-amber-400{--tw-gradient-to:#fbbf24 var(--tw-gradient-to-position)}.to-orange-600{--tw-gradient-to:#ea580c var(--tw-gradient-to-position)}.to-teal-600{--tw-gradient-to:#0d9488 var(--tw-gradient-to-position)}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.p-1\.5{padding:0.375rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.p-1{padding:0.25rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-3\.5{padding-left:0.875rem;padding-right:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.pb-5{padding-bottom:1.25rem}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.tracking-wider{letter-spacing:0.05em}.text-slate-100{--tw-text-opacity:1;color:rgb(241 245 249 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.text-rose-400{--tw-text-opacity:1;color:rgb(251 113 133 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-sky-400{--tw-text-opacity:1;color:rgb(56 189 248 / var(--tw-text-opacity, 1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(167 243 208 / var(--tw-text-opacity, 1))}.opacity-0{opacity:0}.opacity-30{opacity:0.3}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-emerald-900\/30{--tw-shadow-color:rgb(6 78 59 / 0.3);--tw-shadow:var(--tw-shadow-colored)}.shadow-orange-500\/20{--tw-shadow-color:rgb(249 115 22 / 0.2);--tw-shadow:var(--tw-shadow-colored)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:bg-amber-500\/20:hover{background-color:rgb(245 158 11 / 0.2)}.hover\:bg-rose-950\/40:hover{background-color:rgb(76 5 25 / 0.4)}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-800\/60:hover{background-color:rgb(30 41 59 / 0.6)}.hover\:from-emerald-500:hover{--tw-gradient-from:#10b981 var(--tw-gradient-from-position);--tw-gradient-to:rgb(16 185 129 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:to-teal-500:hover{--tw-gradient-to:#14b8a6 var(--tw-gradient-to-position)}.hover\:text-rose-300:hover{--tw-text-opacity:1;color:rgb(253 164 175 / var(--tw-text-opacity, 1))}.hover\:text-slate-200:hover{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.focus\:border-amber-500:focus{--tw-border-opacity:1;border-color:rgb(245 158 11 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}</style></head>
+</head>
 <body class="h-full flex flex-col overflow-hidden bg-slate-950 text-slate-200">
 
     <!-- Navbar Top -->
     <header class="bg-slate-900 border-b border-slate-800 px-6 py-3.5 flex items-center justify-between shrink-0 shadow-lg">
         <div class="flex items-center space-x-3">
-            <!-- Bouton pour masquer/afficher le menu latéral -->
             <button onclick="toggleSidebar()" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700" title="Afficher/Masquer le menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
@@ -42,15 +44,12 @@
             </div>
         </div>
 
-        <!-- Right action buttons -->
         <div class="flex items-center space-x-3">
-            <!-- Edit Mode Toggle -->
             <button id="toggleEditBtn" onclick="toggleEditMode()" class="px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700">
                 <i class="fa-solid fa-pen-to-square text-amber-400"></i>
                 <span id="editBtnText">Mode Édition : Désactivé</span>
             </button>
 
-            <!-- Push to GitHub Button -->
             <button onclick="pushToGithub()" class="px-4 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-900/30 active:scale-95">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
                 <span>Pousser sur GitHub</span>
@@ -60,39 +59,42 @@
 
     <!-- Main Container -->
     <div class="flex flex-1 overflow-hidden">
-
-        <!-- Sidebar Navigation (Notions) -->
+        <!-- Sidebar Navigation -->
         <aside id="sidebar" class="w-72 bg-slate-900/80 border-r border-slate-800 flex flex-col shrink-0 transition-all duration-300">
-            <div class="p-4 border-b border-slate-800/80 flex items-center justify-between">
-                <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Notions Clés</span>
-                <button id="addTabBtn" onclick="addNewTopic()" class="text-xs bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 px-2.5 py-1 rounded-md border border-amber-500/30 transition-all flex items-center gap-1 hidden">
-                    <i class="fa-solid fa-plus"></i> Ajouter
-                </button>
+            <div class="p-4 border-b border-slate-800/80 space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Notions Clés</span>
+                    <button id="addTabBtn" onclick="addNewTopic()" class="text-xs bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 px-2.5 py-1 rounded-md border border-amber-500/30 transition-all flex items-center gap-1 hidden">
+                        <i class="fa-solid fa-plus"></i> Ajouter
+                    </button>
+                </div>
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
+                    <input type="text" id="searchInput" oninput="filterTopics(this.value)" placeholder="Rechercher une notion..." class="w-full bg-slate-950 text-xs text-slate-200 border border-slate-700 rounded-lg pl-8 pr-3 py-2 focus:outline-none focus:border-amber-500 placeholder-slate-500">
+                </div>
             </div>
             
-            <nav id="topicsList" class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-1"><div class="w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"><span class="truncate cursor-pointer flex-1">Variables &amp; Types de données</span></div><div class="w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"><span class="truncate cursor-pointer flex-1">Transtipage (cast)</span></div><div class="w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"><span class="truncate cursor-pointer flex-1">Tableaux</span></div><div class="w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"><span class="truncate cursor-pointer flex-1">Opérateurs</span></div><div class="w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"><span class="truncate cursor-pointer flex-1">Structures de Contrôle</span></div><div class="w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"><span class="truncate cursor-pointer flex-1">Programmation Orientée Objet (POO)</span></div><div class="w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"><span class="truncate cursor-pointer flex-1">Classe</span></div><div class="w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"><span class="truncate cursor-pointer flex-1">Package</span></div><div class="w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"><span class="truncate cursor-pointer flex-1">Collections (List, Map, Set)</span></div><div class="w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"><span class="truncate cursor-pointer flex-1">Gestion des Exceptions</span></div><div class="w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group bg-amber-500/15 text-amber-300 border border-amber-500/30"><span class="truncate cursor-pointer flex-1">Classes Wrapper</span></div></nav>
+            <nav id="topicsList" class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-1"></nav>
             
             <div class="p-3 border-t border-slate-800 bg-slate-950/40 text-xs text-slate-500 flex items-center justify-between">
-                <span>Statut : <span id="statusIndicator" class="text-emerald-400 font-medium">À jour (local)</span></span>
+                <span>Statut : <span id="statusIndicator" class="text-emerald-400 font-medium">À jour</span></span>
             </div>
         </aside>
 
         <!-- Main Content View -->
         <main class="flex-1 overflow-y-auto custom-scrollbar p-8 bg-slate-950 flex flex-col">
             <div class="max-w-4xl w-full mx-auto space-y-6 flex-1">
-                
-                <!-- Topic Header -->
                 <div class="space-y-2 border-b border-slate-800 pb-5 flex items-start justify-between">
                     <div>
                         <div class="flex items-center gap-3">
-                            <h2 id="topicTitle" class="text-3xl font-extrabold text-slate-100 tracking-tight">Classes Wrapper</h2>
-                            <button id="deleteTopicBtn" onclick="deleteCurrentTopic()" class="text-rose-400 hover:text-rose-300 p-1.5 rounded-lg hover:bg-rose-950/40 transition-colors hidden" title="Supprimer cet onglet">
+                            <h2 id="topicTitle" class="text-3xl font-extrabold text-slate-100 tracking-tight"></h2>
+                            <button id="deleteTopicBtn" onclick="deleteCurrentTopic()" class="text-rose-400 hover:text-rose-300 p-1.5 rounded-lg hover:bg-rose-950/40 transition-colors hidden" title="Supprimer">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
                         </div>
                         <input type="text" id="editTopicTitle" class="text-2xl font-bold bg-slate-900 text-amber-300 border border-slate-700 rounded-lg px-3 py-1 w-full focus:outline-none focus:border-amber-500 mt-1 hidden" oninput="updateCurrentTopicTitle(this.value)">
                     </div>
-                    <span id="topicBadge" class="bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
+                    <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
                         Java Core
                     </span>
                 </div>
@@ -103,11 +105,19 @@
                         <i class="fa-solid fa-book-open text-amber-400"></i> Explication de la notion
                     </h3>
                     
-                    <!-- Standard View Mode Text -->
-                    <div id="topicDescription" class="prose prose-invert max-w-none text-slate-300 leading-relaxed space-y-3">Comme les types primitifs ne sont pas des classes et ne portent pas de méthodes, l’API standard de Java fournit des classes qui permettent d’envelopper la valeur d’un type primitif : on parle de classes enveloppantes (ou de Wrapper Classes en anglais) ou wrapper.<br>Les wrapper sont des classes qui portent des méthodes permettant d'agir sur des primitifs.</div>
+                    <div id="richToolbar" class="hidden flex flex-wrap items-center gap-1.5 mb-3 p-2 bg-slate-950 border border-slate-700 rounded-lg text-slate-300 text-xs">
+                        <button onclick="formatText('bold')" class="p-1.5 hover:bg-slate-800 rounded" title="Gras"><i class="fa-solid fa-bold"></i></button>
+                        <button onclick="formatText('italic')" class="p-1.5 hover:bg-slate-800 rounded" title="Italique"><i class="fa-solid fa-italic"></i></button>
+                        <button onclick="formatText('underline')" class="p-1.5 hover:bg-slate-800 rounded" title="Souligné"><i class="fa-solid fa-underline"></i></button>
+                        <span class="w-px h-4 bg-slate-700 mx-1"></span>
+                        <button onclick="formatText('backColor', '#fbbf24')" class="px-2 py-1 bg-amber-500/20 text-amber-300 rounded font-semibold">Surligner</button>
+                        <button onclick="formatText('foreColor', '#38bdf8')" class="w-4 h-4 rounded-full bg-sky-400 inline-block"></button>
+                        <button onclick="formatText('foreColor', '#4ade80')" class="w-4 h-4 rounded-full bg-emerald-400 inline-block"></button>
+                        <button onclick="formatText('removeFormat')" class="text-rose-400 hover:text-rose-300 ml-auto px-2 py-0.5">Effacer styles</button>
+                    </div>
 
-                    <!-- Edit Mode Textarea -->
-                    <textarea id="editTopicDescription" class="w-full h-40 bg-slate-950 text-slate-200 border border-slate-700 rounded-lg p-3 text-sm focus:outline-none focus:border-amber-500 font-sans hidden" oninput="updateCurrentTopicDesc(this.value)"></textarea>
+                    <div id="topicDescription" class="prose prose-invert max-w-none text-slate-300 leading-relaxed space-y-3"></div>
+                    <div id="editTopicDescription" contenteditable="false" class="hidden w-full h-40 bg-slate-950 text-slate-200 border border-slate-700 rounded-lg p-3 text-sm focus:outline-none focus:border-amber-500 font-sans overflow-y-auto custom-scrollbar" oninput="updateCurrentTopicDesc(this.innerHTML)"></div>
                 </div>
 
                 <!-- Code Example Card -->
@@ -124,109 +134,66 @@
                         </button>
                     </div>
 
-                    <!-- Code Display -->
                     <div id="codeDisplayContainer" class="p-4 bg-slate-950 overflow-x-auto">
-                        <pre class="m-0 language-java" tabindex="0"><code id="topicCode" class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">//Exemple 1 :</span>
-        <span class="token keyword">char</span> c <span class="token operator">=</span> <span class="token char">'1'</span><span class="token punctuation">;</span>
-        <span class="token class-name">Character</span> cObj <span class="token operator">=</span> <span class="token class-name">Character</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Wrapper contenant '1'</span>
-        
-        <span class="token class-name">Integer</span> resultatObj <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>cObj<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Wrapper contenant 1</span>
-        <span class="token keyword">int</span> resultat <span class="token operator">=</span> resultatObj<span class="token punctuation">.</span><span class="token function">intValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// conversion d'Integer en int</span>
-
-        <span class="token comment">//Exemple 2 :</span>
-        <span class="token keyword">char</span> c <span class="token operator">=</span> <span class="token char">'1'</span><span class="token punctuation">;</span>
-        <span class="token class-name">Character</span> cObj <span class="token operator">=</span> c<span class="token punctuation">;</span> <span class="token comment">// auto boxing</span>
-        <span class="token keyword">int</span> resultat <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>cObj<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// auto unboxing</span>
-
-        <span class="token comment">//Exemple 3 : utilisation d'une méthode utilitaire du Wrapper</span>
-        <span class="token keyword">char</span> c <span class="token operator">=</span> <span class="token char">'1'</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> resultat <span class="token operator">=</span> <span class="token class-name">Character</span><span class="token punctuation">.</span><span class="token function">getNumericValue</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
+                        <pre class="m-0"><code id="topicCode" class="language-java"></code></pre>
                     </div>
 
-                    <!-- Code Edit Box -->
-                    <div id="codeEditContainer" class="p-4 bg-slate-950 hidden">
+                    <div id="codeEditContainer" class="hidden p-4 bg-slate-950">
                         <textarea id="editTopicCode" class="w-full h-64 bg-slate-900 text-emerald-400 font-mono text-sm border border-slate-700 rounded-lg p-3 focus:outline-none focus:border-amber-500" oninput="updateCurrentTopicCode(this.value)"></textarea>
                     </div>
                 </div>
-
             </div>
         </main>
     </div>
 
-    <!-- Toast Notification Container -->
-    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"><div class="pointer-events-auto px-4 py-3 rounded-xl border bg-slate-800 border-slate-700 text-slate-200 shadow-xl text-xs font-medium flex items-center space-x-2 transition-all transform translate-y-2 opacity-0"><i class="fa-solid fa-circle-info text-sky-400 text-sm"></i> <span>Envoi des modifications sur GitHub...</span></div></div>
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
 
-    <!-- JavaScript Application Logic -->
     <script>
-        // CONFIGURATION GITHUB
         const GITHUB_CONFIG = {
             owner: "MaxenceCharles", 
             repo: "code_java",    
             branch: "main",
-            path: "index.html"                
+            htmlPath: "index.html",
+            jsonPath: "topics.json"
         };
 
-        // Default Java Topics Data
-        const defaultTopics = [
-            {
-                id: 'variables',
-                title: 'Variables & Types de données',
-                description: 'En Java, chaque variable doit être déclarée avec un type spécifique. Les types primitifs principaux incluent `int` pour les entiers, `double` pour les nombres à virgule, `boolean` pour vrai/faux et `char` pour les caractères. Le type `String` permet d\'employer des chaînes de caractères.',
-                code: `public class Main {\n    public static void main(String[] args) {\n        // Déclaration de variables primitives\n        int age = 25;\n        double prix = 19.99;\n        boolean estActif = true;\n        char initiale = 'J';\n\n        // Objet String\n        String nom = "Java Developer";\n\n        System.out.println("Nom: " + nom + ", Âge: " + age);\n    }\n}`
-            },
-            {
-                id: 'control-flow',
-                title: 'Structures de Contrôle',
-                description: 'Les structures de contrôle permettent d\'orienter le flux d\'exécution du programme avec des conditions (`if`, `else`, `switch`) et d\'exécuter des blocs d\'instructions en boucle (`for`, `while`, `do-while`).',
-                code: `public class Main {\n    public static void main(String[] args) {\n        int score = 85;\n\n        // Structure conditionnelle\n        if (score >= 90) {\n            System.out.println("Excellent !");\n        } else if (score >= 70) {\n            System.out.println("Bien joué !");\n        } else {\n            System.out.println("Encouragements.");\n        }\n\n        // Boucle For\n        for (int i = 1; i <= 3; i++) {\n            System.out.println("Compteur: " + i);\n        }\n    }\n}`
-            },
-            {
-                id: 'oop',
-                title: 'Programmation Orientée Objet (POO)',
-                description: 'Java est un langage entièrement orienté objet. Une **Classe** définit la structure et le comportement, tandis qu\'un **Objet** est une instance de cette classe. Les piliers sont l\'Encapsulation, l\'Héritage et le Polymorphisme.',
-                code: `// Définition de la classe Voiture\nclass Voiture {\n    private String marque;\n    private int vitesse;\n\n    // Constructeur\n    public Voiture(String marque) {\n        this.marque = marque;\n        this.vitesse = 0;\n    }\n\n    public void accelerer(int valeur) {\n        this.vitesse += valeur;\n        System.out.println(marque + " roule à " + vitesse + " km/h");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Voiture maVoiture = new Voiture("Tesla");\n        maVoiture.accelerer(50);\n    }\n}`
-            },
-            {
-                id: 'collections',
-                title: 'Collections (List, Map, Set)',
-                description: 'Le Framework Collections regroupe des structures de données réutilisables. `ArrayList` gère des listes dynamiques ordonnées, `HashMap` stocke des clés-valeurs associatives et `HashSet` stocke des éléments uniques.',
-                code: `import java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\npublic class Main {\n    public static void main(String[] args) {\n        // Liste dynamique\n        List<String> fruits = new ArrayList<>();\n        fruits.add("Pomme");\n        fruits.add("Banane");\n\n        // Map Clé-Valeur\n        Map<String, Integer> ages = new HashMap<>();\n        ages.put("Alice", 30);\n        ages.put("Bob", 25);\n\n        System.out.println("Fruits: " + fruits);\n        System.out.println("Âge d'Alice: " + ages.get("Alice"));\n    }\n}`
-            },
-            {
-                id: 'exceptions',
-                title: 'Gestion des Exceptions',
-                description: 'Les exceptions gèrent les erreurs pendant l\'exécution. Les blocs `try-catch-finally` permettent d\'intercepter les erreurs sans faire planter le programme.',
-                code: `public class Main {\n    public static void main(String[] args) {\n        try {\n            int resultat = 10 / 0;\n        } catch (ArithmeticException e) {\n            System.err.println("Erreur : Division par zéro impossible !");\n        } finally {\n            System.out.println("Bloc finally toujours exécuté.");\n        }\n    }\n}`
-            }
-        ];
-
-        // State variables
         let topics = [];
         let currentTopicId = '';
         let isEditMode = false;
         let isSidebarHidden = false;
+        let searchQuery = '';
 
-        // Initialize App
-        window.onload = function() {
-            loadInitialData();
+        window.onload = async function() {
+            await loadTopics();
             renderSidebar();
-            selectTopic(topics[0]?.id || '');
+            if (topics.length > 0) selectTopic(topics[0].id);
+
+            document.getElementById('editTopicCode').addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    e.preventDefault();
+                    const start = this.selectionStart;
+                    const end = this.selectionEnd;
+                    this.value = this.value.substring(0, start) + "    " + this.value.substring(end);
+                    this.selectionStart = this.selectionEnd = start + 4;
+                    updateCurrentTopicCode(this.value);
+                }
+            });
         };
 
-        function loadInitialData() {
-            const savedData = localStorage.getItem('java_tutorial_topics');
-            if (savedData) {
-                try {
-                    topics = JSON.parse(savedData);
-                } catch (e) {
-                    topics = defaultTopics;
+        // Chargement depuis topics.json
+        async function loadTopics() {
+            try {
+                const response = await fetch('topics.json?t=' + Date.now());
+                if (response.ok) {
+                    topics = await response.json();
+                } else {
+                    throw new Error("Fichiers JSON introuvable");
                 }
-            } else {
-                topics = defaultTopics;
+            } catch (err) {
+                console.warn("Chargement du JSON distant échoué, utilisation du localStorage", err);
+                const savedData = localStorage.getItem('java_tutorial_topics');
+                if (savedData) topics = JSON.parse(savedData);
+                else topics = [{ id: 'default', title: 'Introduction', description: 'Bienvenue sur votre guide Java.', code: 'public class Main {}' }];
             }
         }
 
@@ -234,350 +201,228 @@
             localStorage.setItem('java_tutorial_topics', JSON.stringify(topics));
         }
 
-        // Toggle Sidebar Visibility
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             isSidebarHidden = !isSidebarHidden;
-            if (isSidebarHidden) {
-                sidebar.classList.add('hidden');
-            } else {
-                sidebar.classList.remove('hidden');
-            }
+            sidebar.classList.toggle('hidden', isSidebarHidden);
         }
 
-        // Render Navigation Tabs with Reordering Support in Edit Mode
+        function filterTopics(query) {
+            searchQuery = query.toLowerCase().trim();
+            renderSidebar();
+        }
+
         function renderSidebar() {
             const container = document.getElementById('topicsList');
             container.innerHTML = '';
 
-            topics.forEach((topic, index) => {
+            const filteredTopics = topics.filter(t => {
+                if (!searchQuery) return true;
+                return t.title.toLowerCase().includes(searchQuery) || t.description.toLowerCase().includes(searchQuery);
+            });
+
+            if (filteredTopics.length === 0) {
+                container.innerHTML = `<div class="text-xs text-slate-500 text-center py-4">Aucune notion trouvée</div>`;
+                return;
+            }
+
+            filteredTopics.forEach((topic) => {
+                const originalIndex = topics.findIndex(t => t.id === topic.id);
                 const isActive = topic.id === currentTopicId;
                 const div = document.createElement('div');
                 div.className = `w-full px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-between group ${
-                    isActive 
-                    ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30' 
-                    : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
+                    isActive ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
                 }`;
 
-                // Titre cliquable de la notion
                 const titleSpan = document.createElement('span');
                 titleSpan.className = 'truncate cursor-pointer flex-1';
                 titleSpan.textContent = topic.title;
                 titleSpan.onclick = () => selectTopic(topic.id);
                 div.appendChild(titleSpan);
 
-                // Si le mode édition est actif, afficher les flèches pour réordonner
-                if (isEditMode) {
+                if (isEditMode && !searchQuery) {
                     const controls = document.createElement('div');
                     controls.className = 'flex items-center space-x-1 ml-2';
 
-                    // Bouton Monter
                     const upBtn = document.createElement('button');
                     upBtn.innerHTML = '<i class="fa-solid fa-arrow-up text-xs"></i>';
-                    upBtn.className = `p-1 text-slate-400 hover:text-white transition-colors ${index === 0 ? 'opacity-30 cursor-not-allowed' : ''}`;
-                    upBtn.title = 'Monter';
-                    upBtn.onclick = (e) => {
-                        e.stopPropagation();
-                        moveTopic(index, -1);
-                    };
+                    upBtn.className = `p-1 text-slate-400 hover:text-white transition-colors ${originalIndex === 0 ? 'opacity-30 cursor-not-allowed' : ''}`;
+                    upBtn.onclick = (e) => { e.stopPropagation(); moveTopic(originalIndex, -1); };
 
-                    // Bouton Descendre
                     const downBtn = document.createElement('button');
                     downBtn.innerHTML = '<i class="fa-solid fa-arrow-down text-xs"></i>';
-                    downBtn.className = `p-1 text-slate-400 hover:text-white transition-colors ${index === topics.length - 1 ? 'opacity-30 cursor-not-allowed' : ''}`;
-                    downBtn.title = 'Descendre';
-                    downBtn.onclick = (e) => {
-                        e.stopPropagation();
-                        moveTopic(index, 1);
-                    };
+                    downBtn.className = `p-1 text-slate-400 hover:text-white transition-colors ${originalIndex === topics.length - 1 ? 'opacity-30 cursor-not-allowed' : ''}`;
+                    downBtn.onclick = (e) => { e.stopPropagation(); moveTopic(originalIndex, 1); };
 
                     controls.appendChild(upBtn);
                     controls.appendChild(downBtn);
                     div.appendChild(controls);
                 }
-
                 container.appendChild(div);
             });
         }
 
-        // Move Topic Up or Down
         function moveTopic(index, direction) {
             const newIndex = index + direction;
             if (newIndex < 0 || newIndex >= topics.length) return;
-
-            // Échange des éléments dans le tableau
             const temp = topics[index];
             topics[index] = topics[newIndex];
             topics[newIndex] = temp;
-
             saveDataLocally();
             renderSidebar();
-            showToast('Ordre des notions mis à jour', 'info');
         }
 
-        // Select Active Topic
         function selectTopic(id) {
             currentTopicId = id;
             const topic = topics.find(t => t.id === id);
             if (!topic) return;
-
             renderSidebar();
 
             document.getElementById('topicTitle').textContent = topic.title;
             document.getElementById('editTopicTitle').value = topic.title;
-
-            document.getElementById('topicDescription').innerHTML = escapeHtml(topic.description).replace(/\n/g, '<br>');
-            document.getElementById('editTopicDescription').value = topic.description;
-
+            document.getElementById('topicDescription').innerHTML = topic.description;
+            document.getElementById('editTopicDescription').innerHTML = topic.description;
             document.getElementById('topicCode').textContent = topic.code;
             document.getElementById('editTopicCode').value = topic.code;
-
-            // Re-highlight Prism
             Prism.highlightElement(document.getElementById('topicCode'));
         }
 
-        // Edit Mode Toggle
         function toggleEditMode() {
             isEditMode = !isEditMode;
-            const btnText = document.getElementById('editBtnText');
-            const toggleBtn = document.getElementById('toggleEditBtn');
-            const addBtn = document.getElementById('addTabBtn');
-            const deleteBtn = document.getElementById('deleteTopicBtn');
+            document.getElementById('editBtnText').textContent = isEditMode ? "Mode Édition : Activé" : "Mode Édition : Désactivé";
+            document.getElementById('toggleEditBtn').className = isEditMode ? 
+                document.getElementById('toggleEditBtn').className.replace('bg-slate-800 text-slate-300', 'bg-amber-500 text-slate-950 font-bold') :
+                document.getElementById('toggleEditBtn').className.replace('bg-amber-500 text-slate-950 font-bold', 'bg-slate-800 text-slate-300');
 
-            const viewTitle = document.getElementById('topicTitle');
-            const editTitle = document.getElementById('editTopicTitle');
+            document.getElementById('addTabBtn').classList.toggle('hidden', !isEditMode);
+            document.getElementById('deleteTopicBtn').classList.toggle('hidden', !isEditMode);
+            document.getElementById('richToolbar').classList.toggle('hidden', !isEditMode);
+            document.getElementById('topicTitle').classList.toggle('hidden', isEditMode);
+            document.getElementById('editTopicTitle').classList.toggle('hidden', !isEditMode);
+            document.getElementById('topicDescription').classList.toggle('hidden', isEditMode);
+            document.getElementById('editTopicDescription').classList.toggle('hidden', !isEditMode);
+            document.getElementById('editTopicDescription').setAttribute('contenteditable', isEditMode);
+            document.getElementById('codeDisplayContainer').classList.toggle('hidden', isEditMode);
+            document.getElementById('codeEditContainer').classList.toggle('hidden', !isEditMode);
 
-            const viewDesc = document.getElementById('topicDescription');
-            const editDesc = document.getElementById('editTopicDescription');
-
-            const viewCode = document.getElementById('codeDisplayContainer');
-            const editCode = document.getElementById('codeEditContainer');
-
-            if (isEditMode) {
-                btnText.textContent = "Mode Édition : Activé";
-                toggleBtn.className = toggleBtn.className.replace('bg-slate-800 text-slate-300', 'bg-amber-500 text-slate-950 font-bold');
-                addBtn.classList.remove('hidden');
-                deleteBtn.classList.remove('hidden');
-
-                viewTitle.classList.add('hidden');
-                editTitle.classList.remove('hidden');
-
-                viewDesc.classList.add('hidden');
-                editDesc.classList.remove('hidden');
-
-                viewCode.classList.add('hidden');
-                editCode.classList.remove('hidden');
-
-                showToast('Mode édition activé. Vous pouvez modifier, ajouter ou réordonner.', 'info');
-            } else {
-                btnText.textContent = "Mode Édition : Désactivé";
-                toggleBtn.className = toggleBtn.className.replace('bg-amber-500 text-slate-950 font-bold', 'bg-slate-800 text-slate-300');
-                addBtn.classList.add('hidden');
-                deleteBtn.classList.add('hidden');
-
-                viewTitle.classList.remove('hidden');
-                editTitle.classList.add('hidden');
-
-                viewDesc.classList.remove('hidden');
-                editDesc.classList.add('hidden');
-
-                viewCode.classList.remove('hidden');
-                editCode.classList.add('hidden');
-
-                selectTopic(currentTopicId);
-            }
-            renderSidebar(); // Met à jour l'affichage des flèches dans la sidebar
+            if (!isEditMode) selectTopic(currentTopicId);
+            renderSidebar();
         }
 
-        // Update Topic Data
+        function formatText(command, value = null) {
+            document.execCommand(command, false, value);
+            updateCurrentTopicDesc(document.getElementById('editTopicDescription').innerHTML);
+        }
+
         function updateCurrentTopicTitle(val) {
             const topic = topics.find(t => t.id === currentTopicId);
-            if (topic) {
-                topic.title = val;
-                document.getElementById('topicTitle').textContent = val;
-                renderSidebar();
-                saveDataLocally();
-            }
+            if (topic) { topic.title = val; document.getElementById('topicTitle').textContent = val; renderSidebar(); saveDataLocally(); }
         }
 
         function updateCurrentTopicDesc(val) {
             const topic = topics.find(t => t.id === currentTopicId);
-            if (topic) {
-                topic.description = val;
-                document.getElementById('topicDescription').innerHTML = escapeHtml(val).replace(/\n/g, '<br>');
-                saveDataLocally();
-            }
+            if (topic) { topic.description = val; document.getElementById('topicDescription').innerHTML = val; saveDataLocally(); }
         }
 
         function updateCurrentTopicCode(val) {
             const topic = topics.find(t => t.id === currentTopicId);
-            if (topic) {
-                topic.code = val;
-                document.getElementById('topicCode').textContent = val;
-                Prism.highlightElement(document.getElementById('topicCode'));
-                saveDataLocally();
-            }
+            if (topic) { topic.code = val; document.getElementById('topicCode').textContent = val; Prism.highlightElement(document.getElementById('topicCode')); saveDataLocally(); }
         }
 
-        // Add New Topic
         function addNewTopic() {
             const newId = 'topic-' + Date.now();
-            const newTopic = {
-                id: newId,
-                title: 'Nouvelle Notion',
-                description: 'Description de la nouvelle notion Java...',
-                code: '// Écrivez votre code Java ici\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello World");\n    }\n}'
-            };
-            topics.push(newTopic);
+            topics.push({ id: newId, title: 'Nouvelle Notion', description: 'Expliquez votre notion...', code: 'public class Main {}' });
             saveDataLocally();
             selectTopic(newId);
-            showToast('Nouvelle notion créée !', 'success');
+            showToast('Notion ajoutée', 'success');
         }
 
-        // Delete Current Topic
         function deleteCurrentTopic() {
-            if (topics.length <= 1) {
-                showToast('Impossible de supprimer la seule notion restante.', 'warning');
-                return;
-            }
+            if (topics.length <= 1) { showToast('Dernière notion impossible à supprimer', 'warning'); return; }
             topics = topics.filter(t => t.id !== currentTopicId);
             saveDataLocally();
             selectTopic(topics[0].id);
-            showToast('Notion supprimée.', 'success');
+            showToast('Notion supprimée', 'success');
         }
 
-        // PUSH TO GITHUB (Sécurisé via prompt)
+        // PUSH AUTOMATIQUE SUR GITHUB (HTML + JSON mis à jour simultanément)
         async function pushToGithub() {
             let token = localStorage.getItem('gh_pat_token');
-
             if (!token) {
-                token = prompt("Entrez votre Personal Access Token GitHub (ghp_... ou github_pat_...) :");
-                if (!token) return showToast("Publication annulée (token requis)", 'warning');
-                token = token.trim();
-                localStorage.setItem('gh_pat_token', token);
+                token = prompt("Entrez votre Token GitHub (Contents: Read and write) :");
+                if (!token) return;
+                localStorage.setItem('gh_pat_token', token.trim());
             }
 
-            showToast('Envoi des modifications sur GitHub...', 'info');
+            showToast('Mise à jour de index.html et topics.json sur GitHub...', 'info');
 
             try {
-                const currentHtml = document.documentElement.outerHTML;
+                const wasEditing = isEditMode;
+                if (wasEditing) toggleEditMode();
 
-                // 1. Récupérer le SHA actuel du fichier sur GitHub
-                const getUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}?ref=${GITHUB_CONFIG.branch}`;
-                let sha = null;
+                await updateGithubFile(GITHUB_CONFIG.htmlPath, document.documentElement.outerHTML, token, "Mise à jour du design (index.html)");
+                await updateGithubFile(GITHUB_CONFIG.jsonPath, JSON.stringify(topics, null, 4), token, "Mise à jour des cours (topics.json)");
 
-                const getRes = await fetch(getUrl, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-
-                if (getRes.status === 401 || getRes.status === 403) {
-                    localStorage.removeItem('gh_pat_token');
-                    throw new Error("Token invalide ou permissions insuffisantes (401/403).");
-                }
-
-                if (getRes.ok) {
-                    const getData = await getRes.json();
-                    sha = getData.sha;
-                }
-
-                // 2. Encoder le contenu HTML en Base64
-                const utf8Bytes = new TextEncoder().encode(currentHtml);
-                let binaryStr = "";
-                for (let i = 0; i < utf8Bytes.length; i++) {
-                    binaryStr += String.fromCharCode(utf8Bytes[i]);
-                }
-                const contentBase64 = btoa(binaryStr);
-
-                // 3. Envoyer la mise à jour (PUT) sur l'API GitHub
-                const putUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
-                const bodyPayload = {
-                    message: `Mise à jour du tutoriel Java depuis l'interface [${new Date().toLocaleString()}]`,
-                    content: contentBase64,
-                    branch: GITHUB_CONFIG.branch
-                };
-                if (sha) bodyPayload.sha = sha;
-
-                const putRes = await fetch(putUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/vnd.github.v3+json'
-                    },
-                    body: JSON.stringify(bodyPayload)
-                });
-
-                if (putRes.ok) {
-                    showToast('Succès ! Le site a été mis à jour sur GitHub.', 'success');
-                } else {
-                    const errData = await putRes.json();
-                    throw new Error(errData.message || 'Erreur GitHub API');
-                }
-
+                showToast('Succès ! Tout est synchronisé sur GitHub.', 'success');
+                if (wasEditing) toggleEditMode();
             } catch (err) {
                 console.error(err);
-                showToast('Erreur lors du push : ' + err.message, 'error');
+                showToast('Erreur : ' + err.message, 'error');
             }
         }
 
-        // Helpers
+        async function updateGithubFile(path, content, token, message) {
+            const getUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${path}?ref=${GITHUB_CONFIG.branch}`;
+            let sha = null;
+
+            const getRes = await fetch(getUrl, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' } });
+            if (getRes.status === 401 || getRes.status === 403) {
+                localStorage.removeItem('gh_pat_token');
+                throw new Error("Token invalide ou permissions insuffisantes.");
+            }
+            if (getRes.ok) {
+                const getData = await getRes.json();
+                sha = getData.sha;
+            }
+
+            const utf8Bytes = new TextEncoder().encode(content);
+            let binaryStr = "";
+            for (let i = 0; i < utf8Bytes.length; i++) binaryStr += String.fromCharCode(utf8Bytes[i]);
+            
+            const putRes = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${path}`, {
+                method: 'PUT',
+                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
+                body: JSON.stringify({ message: message, content: btoa(binaryStr), branch: GITHUB_CONFIG.branch, ...(sha ? { sha } : {}) })
+            });
+
+            if (!putRes.ok) {
+                const errData = await putRes.json();
+                throw new Error(errData.message || `Erreur sur ${path}`);
+            }
+        }
+
         function copyCode() {
             const topic = topics.find(t => t.id === currentTopicId);
             if (topic) {
-                const textarea = document.createElement('textarea');
-                textarea.value = topic.code;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                showToast('Code copié dans le presse-papier !', 'success');
+                navigator.clipboard.writeText(topic.code);
+                showToast('Code copié !', 'success');
             }
-        }
-
-        function escapeHtml(text) {
-            return text
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
         }
 
         function showToast(message, type = 'info') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
-            
-            let bgColors = 'bg-slate-800 border-slate-700 text-slate-200';
-            let icon = 'fa-circle-info text-sky-400';
+            let bg = 'bg-slate-800 border-slate-700 text-slate-200', icon = 'fa-circle-info text-sky-400';
+            if (type === 'success') { bg = 'bg-slate-900 border-emerald-500/40 text-emerald-200'; icon = 'fa-circle-check text-emerald-400'; }
+            if (type === 'warning') { bg = 'bg-slate-900 border-amber-500/40 text-amber-200'; icon = 'fa-triangle-exclamation text-amber-400'; }
+            if (type === 'error') { bg = 'bg-slate-900 border-rose-500/40 text-rose-200'; icon = 'fa-circle-xmark text-rose-400'; }
 
-            if (type === 'success') {
-                bgColors = 'bg-slate-900 border-emerald-500/40 text-emerald-200';
-                icon = 'fa-circle-check text-emerald-400';
-            } else if (type === 'warning') {
-                bgColors = 'bg-slate-900 border-amber-500/40 text-amber-200';
-                icon = 'fa-triangle-exclamation text-amber-400';
-            } else if (type === 'error') {
-                bgColors = 'bg-slate-900 border-rose-500/40 text-rose-200';
-                icon = 'fa-circle-xmark text-rose-400';
-            }
-
-            toast.className = `pointer-events-auto px-4 py-3 rounded-xl border ${bgColors} shadow-xl text-xs font-medium flex items-center space-x-2 transition-all transform translate-y-2 opacity-0`;
+            toast.className = `pointer-events-auto px-4 py-3 rounded-xl border ${bg} shadow-xl text-xs font-medium flex items-center space-x-2 transition-all transform translate-y-2 opacity-0`;
             toast.innerHTML = `<i class="fa-solid ${icon} text-sm"></i> <span>${message}</span>`;
-
             container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.classList.remove('translate-y-2', 'opacity-0');
-            }, 10);
-
-            setTimeout(() => {
-                toast.classList.add('translate-y-2', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 3500);
+            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
+            setTimeout(() => { toast.classList.add('translate-y-2', 'opacity-0'); setTimeout(() => toast.remove(), 300); }, 3500);
         }
     </script>
-
-</body></html>
+</body>
+</html>

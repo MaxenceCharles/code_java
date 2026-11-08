@@ -1,0 +1,68 @@
+[
+    {
+        "id": "variables",
+        "title": "Variables & Types de données",
+        "description": "En Java, chaque variable doit être déclarée avec un type spécifique. Les types primitifs principaux incluent <code>int</code> pour les entiers, <code>double</code> pour les nombres à virgule, <code>boolean</code> pour vrai/faux et <code>char</code> pour les caractères. Le type <code>String</code> permet d'employer des chaînes de caractères.",
+        "code": "public class Main {\n    public static void main(String[] args) {\n        // Déclaration de variables primitives\n        int age = 25;\n        double prix = 19.99;\n        boolean estActif = true;\n        char initiale = 'J';\n\n        // Objet String\n        String nom = \"Java Developer\";\n\n        System.out.println(\"Nom: \" + nom + \", Âge: \" + age);\n    }\n}"
+    },
+    {
+        "id": "cast",
+        "title": "Transtipage (cast)",
+        "description": "Le transtypage (ou cast) consiste à convertir une variable d'un type vers un autre type compatible.",
+        "code": "public class Main {\n    public static void main(String[] args) {\n        double d = 9.78;\n        int i = (int) d; // Cast explicite de double vers int\n        System.out.println(i); // Affiche 9\n    }\n}"
+    },
+    {
+        "id": "tableaux",
+        "title": "Tableaux",
+        "description": "Un tableau permet de stocker une collection fixe d'éléments de même type.",
+        "code": "public class Main {\n    public static void main(String[] args) {\n        int[] nombres = {10, 20, 30, 40};\n        System.out.println(\"Premier élément : \" + nombres[0]);\n    }\n}"
+    },
+    {
+        "id": "operateurs",
+        "title": "Opérateurs",
+        "description": "Les opérateurs permettent d'effectuer des calculs arithmétiques, des comparaisons ou des opérations logiques.",
+        "code": "public class Main {\n    public static void main(String[] args) {\n        int a = 5, b = 3;\n        boolean test = (a > b) && (b > 0);\n        System.out.println(\"Résultat du test : \" + test);\n    }\n}"
+    },
+    {
+        "id": "control-flow",
+        "title": "Structures de Contrôle",
+        "description": "Les structures de contrôle permettent d'orienter le flux d'exécution du programme avec des conditions (<code>if</code>, <code>else</code>, <code>switch</code>) et d'exécuter des blocs d'instructions en boucle.",
+        "code": "public class Main {\n    public static void main(String[] args) {\n        int score = 85;\n\n        if (score >= 90) {\n            System.out.println(\"Excellent !\");\n        } else if (score >= 70) {\n            System.out.println(\"Bien joué !\");\n        } else {\n            System.out.println(\"Encouragements.\");\n        }\n\n        for (int i = 1; i <= 3; i++) {\n            System.out.println(\"Compteur: \" + i);\n        }\n    }\n}"
+    },
+    {
+        "id": "oop",
+        "title": "Programmation Orientée Objet (POO)",
+        "description": "Java est un langage entièrement orienté objet. Une <b>Classe</b> définit la structure et le comportement, tandis qu'un <b>Objet</b> est une instance de cette classe.",
+        "code": "class Voiture {\n    private String marque;\n    private int vitesse;\n\n    public Voiture(String marque) {\n        this.marque = marque;\n        this.vitesse = 0;\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Voiture maVoiture = new Voiture(\"Tesla\");\n    }\n}"
+    },
+    {
+        "id": "classe",
+        "title": "Classe",
+        "description": "Modèle de base en POO qui regroupe des attributs (données) et des méthodes (comportements).",
+        "code": "public class Personne {\n    String nom;\n    int age;\n\n\tpublic void sePresenter() {\n\t    System.out.println(\"Bonjour, je m'appelle \" + nom);\n\t}\n}"
+    },
+    {
+        "id": "package",
+        "title": "Package",
+        "description": "Permet d'organiser les classes Java en dossiers logiques pour éviter les conflits de nommage.",
+        "code": "package com.monprojet.cours;\n\npublic class TestPackage {\n    // Code du package\n}"
+    },
+    {
+        "id": "collections",
+        "title": "Collections (List, Map, Set)",
+        "description": "Le Framework Collections regroupe des structures de données réutilisables comme <code>ArrayList</code> ou <code>HashMap</code>.",
+        "code": "import java.util.ArrayList;\nimport java.util.List;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<String> fruits = new ArrayList<>();\n        fruits.add(\"Pomme\");\n        fruits.add(\"Banane\");\n        System.out.println(fruits);\n    }\n}"
+    },
+    {
+        "id": "exceptions",
+        "title": "Gestion des Exceptions",
+        "description": "Les exceptions gèrent les erreurs pendant l'exécution à l'aide des blocs <code>try-catch-finally</code>.",
+        "code": "public class Main {\n    public static void main(String[] args) {\n        try {\n            int resultat = 10 / 0;\n        } catch (ArithmeticException e) {\n            System.err.println(\"Erreur : Division par zéro !\");\n        }\n    }\n}"
+    },
+    {
+        "id": "wrapper",
+        "title": "Classes Wrapper",
+        "description": "Comme les types primitifs ne sont pas des classes et ne portent pas de méthodes, l’API standard de Java fournit des classes qui permettent d’envelopper la valeur d’un type primitif : on parle de classes enveloppantes (ou de Wrapper Classes en anglais) ou wrapper.<br>Les wrapper sont des classes qui portent des méthodes permettant d'agir sur des primitifs.",
+        "code": "public class Main {\n    public static void main(String[] args) {\n        // Exemple 1 :\n        char c = '1';\n        Character cObj = Character.valueOf(c); // Wrapper contenant '1'\n        \n        Integer resultatObj = Integer.valueOf(cObj.toString()); // Wrapper contenant 1\n        int resultat = resultatObj.intValue(); // conversion d'Integer en int\n\n        // Exemple 2 :\n        char c2 = '1';\n        Character cObj2 = c2; // auto boxing\n        int resultat2 = Integer.valueOf(cObj2.toString()); // auto unboxing\n\n        // Exemple 3 : utilisation d'une méthode utilitaire du Wrapper\n        char c3 = '1';\n        int resultat3 = Character.getNumericValue(c3);\n    }\n}"
+    }
+]
