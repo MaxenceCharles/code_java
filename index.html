@@ -132,14 +132,35 @@
                         <span class="w-px h-4 bg-slate-700 mx-1"></span>
                         <button onclick="formatText('removeFormat')" class="p-1.5 hover:bg-slate-800 rounded text-rose-400" title="Effacer le formatage"><i class="fa-solid fa-text-slash"></i></button>
                         <span class="w-px h-4 bg-slate-700 mx-1"></span>
-                        <!-- Couleurs et surlignage -->
-                        <div class="flex items-center gap-1">
-                            <span class="text-[10px] text-slate-500">Texte:</span>
-                            <input type="color" onchange="formatText('foreColor', this.value)" class="w-5 h-5 bg-transparent cursor-pointer rounded border border-slate-700" title="Couleur du texte">
+                        <!-- Sélecteur de couleur de texte riche -->
+                        <div class="relative inline-block">
+                            <select onchange="formatText('foreColor', this.value); this.selectedIndex=0;" class="bg-slate-900 text-slate-300 border border-slate-700 rounded px-2 py-1 text-xs cursor-pointer hover:border-amber-500" title="Palette de couleurs de texte">
+                                <option value="" disabled selected>Couleur du texte</option>
+                                <option value="#ffffff" style="color: #ffffff;">Blanc</option>
+                                <option value="#e2e8f0" style="color: #e2e8f0;">Gris clair</option>
+                                <option value="#94a3b8" style="color: #94a3b8;">Gris</option>
+                                <option value="#38bdf8" style="color: #38bdf8;">Bleu ciel</option>
+                                <option value="#3b82f6" style="color: #3b82f6;">Bleu</option>
+                                <option value="#4ade80" style="color: #4ade80;">Vert</option>
+                                <option value="#facc15" style="color: #facc15;">Jaune</option>
+                                <option value="#fb923c" style="color: #fb923c;">Orange</option>
+                                <option value="#f87171" style="color: #f87171;">Rouge</option>
+                                <option value="#c084fc" style="color: #c084fc;">Violet</option>
+                                <option value="#f472b6" style="color: #f472b6;">Rose</option>
+                            </select>
                         </div>
-                        <div class="flex items-center gap-1 ml-1">
-                            <span class="text-[10px] text-slate-500">Fond:</span>
-                            <input type="color" onchange="formatText('backColor', this.value)" class="w-5 h-5 bg-transparent cursor-pointer rounded border border-slate-700" title="Couleur de fond">
+
+                        <!-- Sélecteur de couleur de fond (surlignage) -->
+                        <div class="relative inline-block ml-1">
+                            <select onchange="formatText('backColor', this.value); this.selectedIndex=0;" class="bg-slate-900 text-slate-300 border border-slate-700 rounded px-2 py-1 text-xs cursor-pointer hover:border-amber-500" title="Palette de surlignage">
+                                <option value="" disabled selected>Surlignage</option>
+                                <option value="#fef08a">Jaune pastel</option>
+                                <option value="#bbf7d0">Vert pastel</option>
+                                <option value="#bae6fd">Bleu pastel</option>
+                                <option value="#fed7aa">Orange pastel</option>
+                                <option value="#fbcfe8">Rose pastel</option>
+                                <option value="#334155">Fond Gris Foncé</option>
+                            </select>
                         </div>
                         <span class="w-px h-4 bg-slate-700 mx-1"></span>
                         <!-- Alignements -->
