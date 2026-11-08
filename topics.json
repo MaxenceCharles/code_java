@@ -8,8 +8,8 @@
     {
         "id": "cast",
         "title": "Transtipage (cast)",
-        "description": "Le transtypage (ou cast) consiste à convertir une variable d'un type vers un autre type compatible.",
-        "code": "public class Main {\n    public static void main(String[] args) {\n        double d = 9.78;\n        int i = (int) d; // Cast explicite de double vers int\n        System.out.println(i); // Affiche 9\n    }\n}"
+        "description": "Le transtypage (ou <b>cast</b>) est un mécanisme qui permet de transformer une\ndonnée d'un type en une donnée d'un autre type.\nIl y a deux types de conversion en Java :&nbsp;<div>- la conversion implicite (effectuée automatiquement par le compilateur),</div><div>- la conversion explicite (effectuée par le développeur selon le besoin).\n</div>",
+        "code": "public class Main {\n    public static void main(String[] args) {\n        //Cast implicite\n        int a = 9;\n        double b = a; // la valeur de a est castée implicitement en double\n        System.out.println(b); // 9.0\n\n        //Cast explicite obligatoire\n        float c1 = 5.5; // Erreur de compilation car 5.5 est de type double par défaut\n        float c2 = (float) 5.5; // Déclaration correcte\n        float c3 = 5.5f; // Déclaration correcte\n\n        //Cast explicite avec risque perte valeur\n        float d = 10.5f;\n        int e = (int) d; // on perd la partie flottante\n        System.out.println(e); // 10\n    }\n}"
     },
     {
         "id": "tableaux",
