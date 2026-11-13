@@ -82,5 +82,11 @@
         "title": "Gestion des Exceptions",
         "description": "Les exceptions gèrent les erreurs pendant l'exécution à l'aide des blocs <code>try-catch-finally</code>.",
         "code": "public class Main {\n    public static void main(String[] args) {\n        try {\n            int resultat = 10 / 0;\n        } catch (ArithmeticException e) {\n            System.err.println(\"Erreur : Division par zéro !\");\n        }\n    }\n}"
+    },
+    {
+        "id": "topic-1794562942801",
+        "title": "Enumérations",
+        "description": "<div>Elles permettent de créer des types de données personnalisés.</div><div><br></div><div><b><font color=\"#3b82f6\">Une énumération :</font></b></div><div><ul><li>est une classe java,</li><li>qui est définie à l'aide du mot clé enum,</li><li>qui définit un ensemble fini de valeurs de même type (appelées constantes&nbsp;<span style=\"font-size: 0.875rem;\">d'énumération).</span></li></ul></div><div><br></div><div><b><font color=\"#3b82f6\">À retenir :</font></b></div><div>Si le constructeur de l'énumération est présent, il doit avoir la visibilité private.</div><div><br></div><div><b><font color=\"#3b82f6\">Propriétés d'une énumération :</font></b></div><div><ul><li>limite les valeurs possibles,</li><li>supporte les itérations,</li><li>supporte la syntaxe switch-case,</li><li>peut associer un traitement à une (ou plusieurs) valeur(s).</li></ul></div>",
+        "code": "public enum JoursSemaine {\n    // Objets directement construits\n    LUNDI(\"Lundi\"),\n    MARDI(\"Mardi\"),\n    MERCREDI(\"Mercredi\"),\n    JEUDI(\"Jeudi\"),\n    VENDREDI(\"Vendredi\"),\n    SAMEDI(\"Samedi\"),\n    DIMANCHE(\"Dimanche\");\n\n    private String libelle;\n\n    // Constructeur\n    private JoursSemaine(String libelle) {\n        this.libelle = libelle;\n    }\n\n    public String getLibelle() {\n        return libelle;\n    }\n}\n\n//Utilisation d'un énum\npublic class AppAvecEnum {\n    public static void main(String[] args) {\n\n    // Affichage des horaires d'un jour donné\n        afficherHoraire(JoursSemaine.MERCREDI);\n    }\n\n    public static void afficherHoraire(JoursSemaine jour) {\n        // ...\n    }\n}"
     }
 ]
